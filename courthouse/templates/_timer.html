@@ -1,0 +1,25 @@
+<div class="judging-timer" data-duration-seconds="240">
+  <div class="timer-before-end">
+    <div class="timer-label">Judging Timer</div>
+
+    <div id="judging-timer-display" class="timer-display" aria-live="polite">
+      04:00
+    </div>
+
+    <div class="timer-controls">
+      <button type="button" id="timer-start" class="timer-button timer-start">
+        Start Timer
+      </button>
+
+      <button type="button" id="timer-end" class="timer-button timer-end" disabled>
+        End Early
+      </button>
+    </div>
+  </div>
+
+  <p id="timer-status" class="timer-status">
+    Timer has not started.
+  </p>
+</div>
+
+<script src="{{ url_for('static', filename='js/judging-timer.js') }}"></script>

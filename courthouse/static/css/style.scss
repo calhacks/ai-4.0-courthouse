@@ -360,3 +360,116 @@ input[type=submit].neutral {
     text-align: center;
   }
 }
+
+.judging-timer {
+  max-width: 800px;
+  margin: 0 auto 1rem auto;
+  padding: 1rem;
+  text-align: center;
+  background-color: white;
+  border: 2px solid $vote-color;
+}
+
+.timer-label {
+  font-family: $heading-font;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.timer-display {
+  font-family: $heading-font;
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0.75rem 0;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.timer-button {
+  flex: 1;
+  color: $light;
+  border: 2px solid $dark;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  height: 3rem;
+  cursor: pointer;
+  -webkit-border-radius: 0;
+}
+
+.timer-start {
+  background-color: $current-color;
+  border-color: $current-color;
+}
+
+.timer-end {
+  background-color: $previous-color;
+  border-color: $previous-color;
+}
+
+.timer-button:disabled {
+  background-color: $light-grey;
+  border-color: $light-grey;
+  color: $dark;
+  cursor: not-allowed;
+}
+
+.timer-status {
+  margin-top: 0.75rem;
+  padding-bottom: 0;
+  font-weight: bold;
+}
+
+.timer-finished .timer-display {
+  color: $error-color;
+}
+
+@media (max-width: 500px) {
+  .timer-controls {
+    flex-direction: column;
+  }
+}
+
+.hidden-until-timer {
+  display: none;
+}
+
+body.timer-ended-alert {
+  background-color: $error-color;
+}
+
+.timer-finished {
+  background-color: $error-color;
+  border-color: $error-color;
+  color: $light;
+}
+
+.timer-finished .timer-display {
+  color: $light;
+}
+
+.timer-finished .timer-status {
+  color: $light;
+}
+
+.timer-finished .timer-before-end {
+  display: none;
+}
+
+.timer-finished .timer-status {
+  display: block;
+  font-size: 1.4rem;
+  color: $light;
+  margin: 0;
+  padding: 1rem;
+}
+
+.judging-timer.timer-finished {
+  background-color: $error-color;
+  border-color: $error-color;
+}

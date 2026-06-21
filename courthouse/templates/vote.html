@@ -29,7 +29,8 @@
   </div>
 
   <div class="info">
-    <form action="{{ url_for('vote') }}" method="post">
+    {% include "_timer.html" %}
+    <form action="{{ url_for('vote') }}" method="post" class="vote-form hidden-until-timer">
       <p class="center">Which one is better?</p>
       <div id="vote-previous" class="radio-button button-left">
         <input type="radio" name="action" id="vote-previous-radio" value="Previous">
