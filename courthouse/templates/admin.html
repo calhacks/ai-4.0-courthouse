@@ -28,6 +28,7 @@
           <th data-sort-method="caseInsensitiveSort">Floor</th>
           <th data-sort-method="caseInsensitiveSort">Name</th>
           <th data-sort-method="caseInsensitiveSort">Location</th>
+          <th data-sort-method="caseInsensitiveSort">Track</th>
           <th data-sort-method="caseInsensitiveSort">Description</th>
           <th class="sort-default" data-sort-method="number" data-sort-order="desc">Mu</th>
           <th data-sort-method="number">Sigma Squared</th>
@@ -46,6 +47,7 @@
           <td>{{ item.floor }}</td>
           <td>{{ item.name }}</td>
           <td>{{ item.location }}</td>
+          <td>{{ item.track }}</td>
           <td class="preserve-formatting">{{ item.description }}</td>
           <td>{{ item.mu | round(4) }}</td>
           <td>{{ item.sigma_sq | round(4) }}</td>
@@ -95,7 +97,6 @@
           <th data-sort-method="caseInsensitiveSort">Floor</th>
           <th data-sort-method="caseInsensitiveSort">Name</th>
           <th data-sort-method="caseInsensitiveSort">Email</th>
-          <th data-sort-method="caseInsensitiveSort">Description</th>
           <th data-sort-method="number">Votes</th>
           <th data-sort-method="number">Next (Id)</th>
           <th data-sort-method="number">Previous (Id)</th>
@@ -112,7 +113,6 @@
           <td>{{ annotator.floor }}</td>
           <td>{{ annotator.name }}</td>
           <td>{{ annotator.email }}</td>
-          <td>{{ annotator.description }}</td>
           <td>{{ counts.get(annotator.id, 0) }}</td>
           <td data-sort="{{ annotator.next_id or -1 }}">{{ annotator.next_id }}</td>
           <td data-sort="{{ annotator.prev_id or -1 }}">{{ annotator.prev_id }}</td>
@@ -153,7 +153,7 @@
     <h2>Add Projects</h2>
   </div>
   <div class="info">
-    <p>Add name, floor, location, description (CSV format)</p>
+    <p>Add name, floor, location, track, description (CSV format)</p>
     <textarea name="data" form="item_form"></textarea>
     <form action="{{ url_for('item') }}" method="post" id="item_form" enctype="multipart/form-data">
       <div class="upload-container">
@@ -170,7 +170,7 @@
     <h2>Add Judges</h2>
   </div>
   <div class="info">
-    <p>Add name, floor, email, description (CSV format)</p>
+    <p>Add name, floor, email (CSV format)</p>
     <textarea name="data" form="annotator_form"></textarea>
     <form action="{{ url_for('annotator') }}" method="post" id="annotator_form" enctype="multipart/form-data">
       <div class="upload-container">

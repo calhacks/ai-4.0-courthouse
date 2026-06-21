@@ -5,6 +5,7 @@
   <div class="banner-tight">
     <h1>Start</h1>
   </div>
+
   {% with item=item %}
   {% include "_item.html" %}
   {% endwith %}
@@ -16,9 +17,15 @@
   </div>
 
   <div class="info">
+    {% include "_timer.html" %}
+
     <form action="{{ url_for('begin') }}" method="post" class="vote-form hidden-until-timer">
-      {% include "_timer.html" %}
-      <p class="center">Comparison voting begins after you see your first project. Please click <b>CONTINUE</b> after seeing this project or <b>SKIP</b> if you cannot find this project.</p>
+      <p class="center">
+        Comparison voting begins after you see your first project.
+        Please click <b>CONTINUE</b> after seeing this project or
+        <b>SKIP</b> if you cannot find this project.
+      </p>
+
       <div id="vote-continue" class="radio-button button-full button-gap">
         <input type="radio" name="action" id="vote-continue-radio" value="Continue">
         <label for="vote-continue-radio">Continue</label>

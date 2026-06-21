@@ -8,13 +8,15 @@ from flask import Response
 @utils.requires_auth
 def item_dump():
     items = Item.query.order_by(desc(Item.mu)).all()
-    data = [['Mu', 'Sigma Squared', 'Name', 'Location', 'Description', 'Active']]
+    data = [['Mu', 'Sigma Squared', 'Name', 'Floor', 'Location', 'Description', 'Track', 'Active']]
     data += [[
         str(item.mu),
         str(item.sigma_sq),
         item.name,
+        str(item.floor),
         item.location,
         item.description,
+        item.track,
         item.active
     ] for item in items]
     return Response(utils.data_to_csv_string(data), mimetype='text/csv')
@@ -24,7 +26,7 @@ def item_dump():
 @utils.requires_auth
 def annotator_dump():
     annotators = Annotator.query.all()
-    data = [['Name', 'Email', 'Description', 'Secret']]
+    data = [['Name', 'Email', 'Secret']]
     data += [[
         str(a.name),
         a.email,

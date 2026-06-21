@@ -12,6 +12,7 @@ class Item(db.Model):
     name = db.Column(db.Text, nullable=False)
     location = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
+    track = db.Column(db.Text, nullable=False, default='')
     floor = db.Column(db.Integer, nullable=False)
     active = db.Column(db.Boolean, default=True, nullable=False)
     viewed = db.relationship('Annotator', secondary=view_table)
@@ -20,11 +21,12 @@ class Item(db.Model):
     mu = db.Column(db.Float)
     sigma_sq = db.Column(db.Float)
 
-    def __init__(self, name, floor, location, description):
+    def __init__(self, name, floor, location, description, track=''):
         self.name = name
         self.location = location
         self.floor = int(floor)
         self.description = description
+        self.track = track
         self.mu = crowd_bt.MU_PRIOR
         self.sigma_sq = crowd_bt.SIGMA_SQ_PRIOR
 

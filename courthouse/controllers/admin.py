@@ -54,7 +54,7 @@ def item():
         if data:
             # validate data
             for index, row in enumerate(data):
-                if len(row) != 4:
+                if len(row) != 5:
                     return utils.user_error('Bad data: row %d has %d elements (expecting 4)' % (index + 1, len(row)))
             def tx():
                 for row in data:
@@ -105,14 +105,21 @@ def parse_upload_form():
         if extension == "xlsx" or extension == "xls":
             workbook = xlrd.open_workbook(file_contents=f.read())
             worksheet = workbook.sheet_by_index(0)
-            data = list(utils.cast_row(worksheet.row_values(rx, 0, 3)) for rx in range(worksheet.nrows) if worksheet.row_len(rx) == 3)
+
+            for rx in range(worksheet.nrows):
+                row = worksheet.row_values(rx, 0, worksheet.row_len(rx))
+                row = utils.cast_row(row)
+
+                # Skip fully empty rows
+                if any(str(cell).strip() for cell in row):
+                    data.append(row)
+
         elif extension == "csv":
             data = utils.data_from_csv_string(f.read().decode("utf-8"))
     else:
         csv = request.form['data']
         data = utils.data_from_csv_string(csv)
     return data
-
 
 @app.route('/admin/item_patch', methods=['POST'])
 @utils.requires_auth
@@ -127,6 +134,8 @@ def item_patch():
             item.name = request.form['name']
         if 'description' in request.form:
             item.description = request.form['description']
+        if 'track' in request.form:
+            item.track = request.form['track']
         db.session.commit()
     with_retries(tx)
     return redirect(url_for('item_detail', item_id=item.id))
@@ -141,7 +150,7 @@ def annotator():
         if data:
             # validate data
             for index, row in enumerate(data):
-                if len(row) != 4:
+                if len(row) != 3:
                     return utils.user_error('Bad data: row %d has %d elements (expecting 4)' % (index + 1, len(row)))
             def tx():
                 for row in data:
